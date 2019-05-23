@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="CardReader" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>CardReader</name>
+    <js-module name="CardReader" src="www/CardReader.js">
+        <clobbers target="CardReader" />
+    </js-module>
+    
+     <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="CardReader">
+                <param name="android-package" value="com.plugin.cardreader.CardReader" />
+            </feature>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.NFC" />
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity 
+                android:name="com.plugin.cardreader.CardActivity" 
+                android:launchMode="singleTask" 
+                android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+            </intent-filter>
+        </activity>
+        </config-file>
+        
+        <source-file src="src/android/CardActivity.java" target-dir="src/com/plugin/cardreader" />
+        <source-file src="src/android/CardReader.java" target-dir="src/com/plugin/cardreader" />
+        <source-file src="src/android/libs/idcardapi.jar" target-dir="app/libs" />
+        <source-file src="src/android/libs/NFCIDReaderSDK.jar" target-dir="app/libs" />
+        <source-file src="src/android/libs/jsp-api.jar" target-dir="app/src/main/jniLibs" />
+        <source-file src="src/android/libs/servlet-api.jar" target-dir="app/src/main/jniLibs" />
+        <source-file src="src/android/libs/libcurl.so" target-dir="app/src/main/jniLibs/armeabi" />
+        <source-file src="src/android/libs/libKmsSupport.so" target-dir="app/src/main/jniLibs/armeabi" />
+        <source-file src="src/android/libs/libwltdecode.so" target-dir="app/src/main/jniLibs/armeabi" />
+        <source-file src="src/android/res/raw/base.dat" target-dir="app/src/main/res/raw" />
+        <source-file src="src/android/res/raw/license.lic" target-dir="app/src/main/res/raw" />
+    </platform>
+</plugin>
